@@ -2,7 +2,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from order_app.models import CreateOrderRequest, InvalidOrderError, InventoryServiceError, OutOfStockError
+from order_app.models import CreateOrderRequest, InvalidOrderError, InventoryServiceError, OrderNotFoundError, OutOfStockError
 from order_app.repository import InMemoryOrderRepository
 from order_app.service import OrderService
 
@@ -62,3 +62,18 @@ def test_create_order_wraps_unexpected_inventory_failures(repository, order_requ
         service.create_order(order_request)
 
     assert repository.count() == 0
+
+
+@pytest.mark.unit
+def test_get_order_returns_saved_order(order_service, order_request) -> None:
+    created = order_service.create_order(order_request)
+
+    fetched = order_service.get_order(created.order_id)
+
+    assert fetched == created
+
+
+@pytest.mark.unit
+def test_get_order_raises_for_missing_order(order_service) -> None:
+    with pytest.raises(OrderNotFoundError, match="order missing-order not found"):
+        order_service.get_order("missing-order")

@@ -1,7 +1,9 @@
+from pathlib import Path
+
 import pytest
 
 from order_app.models import CreateOrderRequest, OutOfStockError
-from order_app.repository import InMemoryOrderRepository
+from order_app.repository import InMemoryOrderRepository, SqliteOrderRepository
 from order_app.service import OrderService
 
 
@@ -34,6 +36,11 @@ def order_request() -> CreateOrderRequest:
 @pytest.fixture
 def repository() -> InMemoryOrderRepository:
     return InMemoryOrderRepository()
+
+
+@pytest.fixture
+def sqlite_repository(tmp_path: Path) -> SqliteOrderRepository:
+    return SqliteOrderRepository(str(tmp_path / "orders.db"))
 
 
 @pytest.fixture

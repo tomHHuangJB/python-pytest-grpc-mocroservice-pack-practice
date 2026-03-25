@@ -15,6 +15,11 @@ class OrderApiClient:
         self._raise_for_error_response(response)
         return OrderResponsePayload.model_validate(response.json())
 
+    def get_order(self, order_id: str) -> OrderResponsePayload:
+        response = self.client.get(f"/orders/{order_id}")
+        self._raise_for_error_response(response)
+        return OrderResponsePayload.model_validate(response.json())
+
     def _raise_for_error_response(self, response: httpx.Response) -> None:
         if response.is_success:
             return

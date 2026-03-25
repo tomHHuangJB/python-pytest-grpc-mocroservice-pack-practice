@@ -19,3 +19,11 @@ class OrderResponsePayload(BaseModel):
 
 class ErrorResponsePayload(BaseModel):
     detail: str
+
+
+class OrderSummaryPayload(BaseModel):
+    order_id: str
+    customer_id: str
+    sku: str
+    quantity: int
+    total_price: float

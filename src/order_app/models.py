@@ -33,3 +33,7 @@ class OutOfStockError(OrderError):
 
 class InventoryServiceError(OrderError):
     """Raised when the inventory dependency fails."""
+
+
+class OrderNotFoundError(OrderError):
+    """Raised when an order cannot be found."""

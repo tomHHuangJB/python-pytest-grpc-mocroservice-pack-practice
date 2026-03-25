@@ -5,6 +5,7 @@ from order_app.models import (
     InvalidOrderError,
     InventoryServiceError,
     Order,
+    OrderNotFoundError,
     OutOfStockError,
 )
 from order_app.pricing import calculate_total
@@ -12,9 +13,10 @@ from order_app.repository import InMemoryOrderRepository
 
 
 class OrderService:
-    def __init__(self, repository: InMemoryOrderRepository, inventory_client) -> None:
+    def __init__(self, repository: InMemoryOrderRepository, inventory_client, id_factory=None) -> None:
         self.repository = repository
         self.inventory_client = inventory_client
+        self.id_factory = id_factory or (lambda: str(uuid4()))
 
     def create_order(self, request: CreateOrderRequest) -> Order:
         self._validate_request(request)
@@ -28,7 +30,7 @@ class OrderService:
             raise InventoryServiceError("inventory dependency failed") from exc
 
         order = Order(
-            order_id=str(uuid4()),
+            order_id=self.id_factory(),
             customer_id=request.customer_id,
             sku=request.sku,
             quantity=request.quantity,
@@ -36,6 +38,12 @@ class OrderService:
             total_price=total_price,
         )
         self.repository.save(order)
+        return order
+
+    def get_order(self, order_id: str) -> Order:
+        order = self.repository.get_by_id(order_id)
+        if order is None:
+            raise OrderNotFoundError(f"order {order_id} not found")
         return order
 
     def _validate_request(self, request: CreateOrderRequest) -> None:
