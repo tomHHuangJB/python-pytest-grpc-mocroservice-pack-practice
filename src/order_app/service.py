@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from order_app.eventing import OrderCreatedEvent
 from order_app.models import (
     CreateOrderRequest,
     InvalidOrderError,
@@ -8,7 +9,6 @@ from order_app.models import (
     OrderNotFoundError,
     OutOfStockError,
 )
-from order_app.eventing import OrderCreatedEvent
 from order_app.pricing import calculate_total
 from order_app.repository import InMemoryOrderRepository
 

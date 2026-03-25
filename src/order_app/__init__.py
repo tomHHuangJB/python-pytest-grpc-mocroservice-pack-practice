@@ -1,1 +1,1 @@
-"""Practice package for interview-oriented Python and pytest exercises."""
+"""Practice package for Python-based service and QA automation examples."""

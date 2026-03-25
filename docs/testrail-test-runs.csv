@@ -1,0 +1,4 @@
+Run Name,Build,Suite,Executed By,Status,Pass Count,Fail Count,Blocked Count,Notes
+Local Regression Smoke,main-local,Order Practice Suite,Tom Huang,Passed,10,0,0,"Full non-UI and UI suite passed locally"
+CI Non-UI Matrix,GitHub Actions,Order Practice Suite,GitHub Actions,Passed,41,0,0,"Python 3.11 and 3.12 non-UI jobs green"
+CI UI Chromium,GitHub Actions,Order Practice Suite,GitHub Actions,Passed,2,0,0,"Playwright UI tests green on dedicated Chromium job"

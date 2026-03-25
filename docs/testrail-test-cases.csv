@@ -1,0 +1,11 @@
+Section,Case ID,Title,Priority,Type,Preconditions,Steps,Expected Result,Automation
+API Orders,C001,Create order successfully,High,Functional,"App running; inventory available","POST /orders with valid payload","201 returned with correct order body; order persisted",Yes
+API Orders,C002,Reject out-of-stock order,High,Negative,"App running; inventory unavailable","POST /orders with out-of-stock SKU","409 returned; no order persisted",Yes
+API Orders,C003,Return existing order by ID,High,Functional,"Order already created","GET /orders/{order_id}","200 returned with matching order payload",Yes
+API Orders,C004,Return 404 for missing order,Medium,Negative,"App running","GET /orders/missing-order","404 returned with useful error detail",Yes
+Database,C005,No partial write on dependency timeout,High,Integration,"SQLite repository configured","Trigger timeout during order creation","502 returned or dependency error raised; database remains unchanged",Yes
+gRPC Inventory,C006,Reserve inventory through gRPC successfully,High,Integration,"gRPC inventory service running","Call Reserve with available SKU","Reservation succeeds and stock count decreases",Yes
+gRPC Inventory,C007,Map gRPC timeout to dependency error,High,Negative,"gRPC inventory service configured for timeout","Call Reserve on timeout SKU","Dependency error raised; no order persisted",Yes
+UI,C008,Create order through browser UI,High,UI,"App running; Playwright browser installed","Open / and click Create Order","Confirmation message shown and order created",Yes
+UI,C009,Show UI error on out-of-stock response,Medium,UI,"App running; Playwright browser installed","Submit UI form with out-of-stock SKU","Error message shown in result section",Yes
+Contract,C010,Verify consumer contract for create and get order,High,Contract,"Provider app and Pact tooling available","Run consumer and provider Pact tests","Contract file generated and provider verification passes",Yes
