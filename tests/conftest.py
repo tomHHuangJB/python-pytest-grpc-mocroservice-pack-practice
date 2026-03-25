@@ -23,6 +23,16 @@ class StubInventoryClient:
         raise RuntimeError(f"unknown mode: {self.mode}")
 
 
+@pytest.fixture(scope="session")
+def repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+@pytest.fixture(scope="session")
+def proto_contract_path(repo_root: Path) -> Path:
+    return repo_root / "proto" / "order_app" / "grpc_contracts" / "inventory.proto"
+
+
 @pytest.fixture
 def order_request() -> CreateOrderRequest:
     return CreateOrderRequest(

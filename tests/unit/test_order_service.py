@@ -18,6 +18,18 @@ def test_create_order_saves_order_and_calls_inventory(order_service, inventory_c
 
 
 @pytest.mark.unit
+def test_create_order_with_same_idempotency_key_returns_existing_order_without_duplicate_side_effects(
+    order_service, inventory_client, repository, order_request
+) -> None:
+    first_order = order_service.create_order(order_request, idempotency_key="req-123")
+    repeated_order = order_service.create_order(order_request, idempotency_key="req-123")
+
+    assert repeated_order == first_order
+    assert repository.count() == 1
+    assert inventory_client.calls == [("sku-001", 2)]
+
+
+@pytest.mark.unit
 @pytest.mark.parametrize(
     ("field", "value", "expected_message"),
     [

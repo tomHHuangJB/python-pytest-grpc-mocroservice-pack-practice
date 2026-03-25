@@ -4,6 +4,7 @@
 .coverage
 htmlcov/
 coverage.xml
+docs/chatInstructions.md
 dist/
 build/
 *.egg-info/
