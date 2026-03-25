@@ -44,6 +44,7 @@ class OrderService:
             total_price=total_price,
         )
         self.repository.save(order, idempotency_key=idempotency_key)
+<<<<<<< HEAD
         if self.event_bus is not None:
             self.event_bus.publish(
                 "order.created",
@@ -55,6 +56,8 @@ class OrderService:
                     total_price=order.total_price,
                 ),
             )
+=======
+>>>>>>> 69e7893 (Add idempotency coverage and clean POC wording)
         return order
 
     def get_order(self, order_id: str) -> Order:

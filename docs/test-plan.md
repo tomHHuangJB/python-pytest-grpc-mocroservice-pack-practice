@@ -299,16 +299,24 @@ Constraints:
 ## 16. Approval Recommendation
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This test plan is appropriate for a small but realistic QA repository because it:
 =======
 This test plan is appropriate for a small but realistic QA practice repository because it:
 >>>>>>> 0dfdd0b (Add senior QA docs, TestRail artifacts, and Docker setup)
+=======
+This test plan is appropriate for a small but realistic QA repository because it:
+>>>>>>> 69e7893 (Add idempotency coverage and clean POC wording)
 
 - applies layered automation instead of relying on a single test type
 - prioritizes high-risk failure modes such as contract drift and partial persistence
 - includes both technical validation and QA process artifacts
 <<<<<<< HEAD
+<<<<<<< HEAD
 - demonstrates a maintainable, repeatable test execution model suitable for technical review and ongoing extension
 =======
 - demonstrates a maintainable, repeatable test execution model suitable for interview discussion and portfolio use
 >>>>>>> 0dfdd0b (Add senior QA docs, TestRail artifacts, and Docker setup)
+=======
+- demonstrates a maintainable, repeatable test execution model suitable for technical review and ongoing extension
+>>>>>>> 69e7893 (Add idempotency coverage and clean POC wording)

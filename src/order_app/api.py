@@ -1,7 +1,12 @@
 from typing import Annotated
+<<<<<<< HEAD
 from xml.etree import ElementTree
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request, Response, WebSocket, status
+=======
+
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, status
+>>>>>>> 69e7893 (Add idempotency coverage and clean POC wording)
 from fastapi.responses import HTMLResponse
 
 from order_app.models import (

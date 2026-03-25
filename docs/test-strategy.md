@@ -252,4 +252,4 @@ The strategy is appropriate for this repository because it balances:
 - developer feedback and stakeholder reporting
 - technical automation and QA process visibility
 
-That combination is what makes the repository stronger for interview discussion and closer to industry-standard QA practice.
+That combination is what makes the repository a stronger technical reference and closer to industry-standard QA practice.

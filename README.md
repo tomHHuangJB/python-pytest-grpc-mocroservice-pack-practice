@@ -156,10 +156,13 @@ Questions this repo helps you answer:
 8. How do the SQLite-backed tests prove persistence behavior and no-partial-write guarantees with real storage?
 9. How do the Pact tests prove consumer and provider stay aligned?
 10. Why are the Playwright UI tests intentionally narrow, and what value do they add beyond API tests?
+<<<<<<< HEAD
 11. How does the SOAP endpoint show XML-based service testing?
 12. How do the GraphQL tests prove both mutation and query behavior?
 13. How do the WebSocket and webhook tests cover realtime and callback integrations?
 14. How does the event-bus example demonstrate message-driven testing?
+=======
+>>>>>>> 69e7893 (Add idempotency coverage and clean POC wording)
 
 ## Useful Commands
 
@@ -290,7 +293,11 @@ The repo now covers these major service and integration styles:
 - webhook callbacks with `POST /webhooks/inventory-events`
 - message-driven integration with `src/order_app/eventing.py`
 
+<<<<<<< HEAD
 The tests show how each style is validated:
+=======
+The gRPC path is useful because it lets you work through:
+>>>>>>> 69e7893 (Add idempotency coverage and clean POC wording)
 
 - REST and HTTP contract coverage in `tests/integration/test_fastapi_orders_api.py` and `tests/contracts/test_order_api_contracts.py`
 - SOAP, GraphQL, WebSocket, webhook, and event-bus coverage in `tests/integration/test_additional_service_types.py`

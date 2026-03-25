@@ -1,1 +1,1 @@
-"""gRPC microservice helpers for interview practice."""
+"""gRPC microservice helpers for service-integration examples."""
