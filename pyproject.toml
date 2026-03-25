@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-pytest-grpc-mocroservice-pack-practice"
+version = "0.1.0"
+description = "Interview-focused Python and pytest practice project"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "grpcio>=1.74",
+    "httpx>=0.28",
+]
+
+[project.optional-dependencies]
+dev = [
+    "grpcio-tools>=1.74",
+    "pytest>=8.2",
+    "pytest-cov>=5.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "unit: fast unit tests",
+    "integration: workflow and repository tests",
+    "api: API and contract-focused tests",
+    "grpc: gRPC and microservice integration tests",
+]
+
+[tool.coverage.run]
+source = ["order_app"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package order_app.grpc_contracts;
+
+service InventoryService {
+  rpc Reserve(ReserveRequest) returns (ReserveResponse);
+}
+
+message ReserveRequest {
+  string sku = 1;
+  int32 quantity = 2;
+}
+
+message ReserveResponse {
+  bool reserved = 1;
+  string reason = 2;
+}

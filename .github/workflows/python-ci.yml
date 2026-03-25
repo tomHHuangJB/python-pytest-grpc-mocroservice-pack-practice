@@ -1,0 +1,52 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.11"
+          - "3.12"
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Regenerate gRPC stubs
+        run: |
+          python -m grpc_tools.protoc \
+            -I proto \
+            --python_out=src \
+            --grpc_python_out=src \
+            proto/order_app/grpc_contracts/inventory.proto
+
+      - name: Verify generated files are up to date
+        run: git diff --exit-code
+
+      - name: Run tests with coverage
+        env:
+          PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+        run: |
+          unset PYTEST_PLUGINS
+          pytest --cov=order_app --cov-report=term-missing
